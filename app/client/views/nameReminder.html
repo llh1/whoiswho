@@ -1,0 +1,26 @@
+<template name="nameReminder">
+    <div id="name-reminder">
+        <div class="row">
+            <div class="col-md-7">
+                <img src="{{picture.url}}" id="personToFind" class="img-rounded img-thumbnail pull-right"/>
+            </div>
+            <div class="col-md-3">
+                <h1>My name is...</h1>
+                {{#each names}}
+                    {{>nameChoice}}
+                {{/each}}
+                {{#if answered}}
+                    <p>
+                        <i class="fa fa-arrow-circle-right next"></i>
+                    </p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="nameChoice">
+    <p>
+        <button type="button" class="center-block btn btn-default name-button">{{firstName}} {{lastName}}</button>
+    </p>
+</template>

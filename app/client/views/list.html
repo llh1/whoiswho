@@ -1,0 +1,53 @@
+<template name="list">
+    <div class="row">
+    {{#each persons}}
+      {{>person}}
+    {{/each}}
+    </div>
+</template>
+
+<template name="person">
+      <div class="personBox col-lg-3 col-sm-4 col-xs-6">
+          <img src="{{displayPicture.url}}" class="img-responsive"/>
+          {{#if editing}}
+              <div class="edit-form">
+                  <form role="form" class="form-horizontal">
+                      <div class="form-group form-group-sm">
+                          <label for="firstName" class="col-sm-4 control-label">FirstName</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control input-sm" name="firstName" value="{{firstName}}">
+                          </div>
+                      </div>
+                      <div class="form-group form-group-sm">
+                          <label for="lastName" class="col-sm-4 control-label">LastName</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control input-sm" name="lastName" value="{{lastName}}">
+                          </div>
+                      </div>
+                      <div class="form-group form-group-sm">
+                          <label for="company" class="col-sm-4 control-label">Company</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control input-sm" name="company" value="{{company}}">
+                          </div>
+                      </div>
+                      <div class="form-group form-group-sm">
+                          <label for="role" class="col-sm-4 control-label">Role</label>
+                          <div class="col-sm-8">
+                            <input type="text" class="form-control input-sm" name="role" value="{{role}}">
+                          </div>
+                      </div>
+                      <div class="text-center">
+                          <button type="submit" class="btn btn-default btn-xs save-update-person-button">Save</button>
+                          <button class="btn btn-default btn-xs cancel-update-person-button">Cancel</button>
+                      </div>
+                  </form>
+              </div>
+          {{else}}
+          <span class="identity" title="{{company}} - {{role}}">{{firstName}} {{lastName}}</span>
+          <div class="edit">
+            <button type="button" class="btn btn-default btn-xs update-person-button">E</button>
+            <button type="button" class="btn btn-default btn-xs delete-person-button">X</button>
+          </div>
+          {{/if}}
+      </div>
+</template>

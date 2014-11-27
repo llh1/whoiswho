@@ -1,0 +1,15 @@
+<template name="addProfile">
+    <div id="addProfileContainer">
+        <h2>Add a new profile</h2>
+        {{#autoForm collection="Persons" id="addProfileForm" type="insert"}}
+            <fieldset>
+                {{> afQuickField name='firstName'}}
+                {{> afQuickField name='lastName'}}
+                {{> afQuickField name='company'}}
+                {{> afQuickField name='role'}}
+                {{> afQuickField name="pictureId" type="cfs-file" collection="pictures"}}
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Insert</button>
+        {{/autoForm}}
+    </div>
+</template>

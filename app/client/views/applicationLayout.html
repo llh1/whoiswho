@@ -1,0 +1,44 @@
+<template name="applicationLayout">
+    <head>
+        <meta charset="utf-8">
+        <title>Who is Who</title>
+        <meta name="description" content="">
+
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Who is Who</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/"><i class="fa fa-list"></i> List <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/add"><i class="fa fa-plus-square"></i> Add a New Profile</a></li>
+                        <li><a href="/nameReminder"><i class="fa fa-font"></i> The Name Reminder</a></li>
+                        <li><a href="/faceReminder"><i class="fa fa-picture-o"></i> The Face Reminder</a></li>
+                    </ul>
+                    <div class="nav navbar-nav navbar-right">
+                        {{> searchBox}}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid content">
+            {{> yield}}
+        </div>
+
+        <div id="credits">
+            <p>Powered by Meteor, built by Loic.</p>
+        </div>
+    </body>
+</template>
