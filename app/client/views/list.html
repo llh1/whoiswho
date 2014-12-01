@@ -43,10 +43,11 @@
                   </form>
               </div>
           {{else}}
-          <span class="identity" title="{{company}} - {{role}}">{{firstName}} {{lastName}}</span>
+          <span class="identity">{{firstName}} {{lastName}}</span>
           <div class="edit">
-            <button type="button" class="btn btn-default btn-xs update-person-button">E</button>
-            <button type="button" class="btn btn-default btn-xs delete-person-button">X</button>
+              <i id="profile-info-{{_id}}" class="fa fa-user show-profile-button" data-toggle="tooltip" data-placement="bottom" title="{{profileInfo}}"></i>
+              <i class="fa fa-pencil-square-o update-person-button"></i>
+              <i class="fa fa-trash delete-person-button"></i>
           </div>
           {{/if}}
       </div>

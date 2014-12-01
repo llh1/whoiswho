@@ -3,7 +3,6 @@
         <meta charset="utf-8">
         <title>Who is Who</title>
         <meta name="description" content="">
-
     </head>
 
     <body>
@@ -21,10 +20,11 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/"><i class="fa fa-list"></i> List <span class="sr-only">(current)</span></a></li>
-                        <li><a href="/add"><i class="fa fa-plus-square"></i> Add a New Profile</a></li>
-                        <li><a href="/nameReminder"><i class="fa fa-font"></i> The Name Reminder</a></li>
-                        <li><a href="/faceReminder"><i class="fa fa-picture-o"></i> The Face Reminder</a></li>
+                        <li class="{{activeIfTemplateIs ''}}"><a href="/"><i class="fa fa-list"></i> List <span class="sr-only">(current)</span></a></li>
+                        <li class="{{activeIfTemplateIs 'Add'}}"><a href="/add"><i class="fa fa-plus-square"></i> Add a New Profile</a></li>
+                        <li class="{{activeIfTemplateIs 'NameReminder'}}"><a href="/nameReminder"><i class="fa fa-font"></i> The Name Reminder</a></li>
+                        <li class="{{activeIfTemplateIs 'FaceReminder'}}"><a href="/faceReminder"><i class="fa fa-picture-o"></i> The Face Reminder</a></li>
+                        <li><a href="#"><i class="fa fa-rocket"></i> {{> score}}</a></li>
                     </ul>
                     <div class="nav navbar-nav navbar-right">
                         {{> searchBox}}

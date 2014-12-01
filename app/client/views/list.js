@@ -1,14 +1,18 @@
-Template.list.persons = function() {
-  var query = Session.get("searchQuery");
-  if(query != undefined && query.length > 1) {
-    return Persons.find({$or: [
-      {firstName: new RegExp(query, "i")},
-      {lastName: new RegExp(query, "i")}
-    ]});
-  } else {
-    return Persons.find({});
-  }
-};
+Template.list.helpers({
+    persons: function() {
+      var query = Session.get("searchQuery");
+      if(query != undefined && query.length > 1) {
+        return Persons.find({$or: [
+          {firstName: new RegExp(query, "i")},
+          {lastName: new RegExp(query, "i")},
+          {company: new RegExp(query, "i")},
+          {role: new RegExp(query, "i")}
+        ]});
+      } else {
+        return Persons.find({});
+      }
+    }
+});
 
 Template.person.helpers({
   editing: function() {
@@ -16,6 +20,22 @@ Template.person.helpers({
   },
   displayPicture: function() {
     return Pictures.find({_id: this.pictureId}).fetch()[0];
+  },
+  profileInfo: function() {
+    var id = this._id;
+    Meteor.defer(function() {
+      $("#profile-info-" + id).tooltip("fixTitle");
+    });
+
+    if(this.role && this.company) {
+      return "Work as " + this.role + " at " + this.company;
+    } else if(this.role) {
+      return this.role;
+    } else if(this.company) {
+      return "Work at " + this.company;
+    } else {
+      return "No data"
+    }
   }
 });
 
@@ -42,3 +62,7 @@ Template.person.events({
     event.preventDefault();
   }
 });
+
+Template.person.rendered = function() {
+  $(".show-profile-button").tooltip();
+};

@@ -1,51 +1,51 @@
-Template.nameReminder.helpers({
-    names: function () {
+Template.faceReminder.helpers({
+    pictures: function () {
         Session.get("reload");
         Session.set("reload", null);
         var persons = Persons.find({random: {$near: [Math.random(), 0]}}, {limit: 4});
         var shuffledPersons = _.shuffle(persons.fetch().map(function(person) {
-           return person;
+            return person;
         }));
         Session.set("personToFind", shuffledPersons[0]);
-        return persons;
+
+        var pictureIds = _.pluck(shuffledPersons, "pictureId");
+        return Pictures.find({_id: {$in: pictureIds}});
     },
-    picture: function() {
-        var personToFind = Session.get("personToFind");
-        if(personToFind) {
-            return Pictures.find({_id: personToFind.pictureId}).fetch()[0];
-        }
+    person: function() {
+        return Session.get("personToFind");
     },
     answered: function() {
         return Session.get("answered") != undefined;
     }
 });
 
-Template.nameReminder.events({
-    "click .name-button": function(event) {
-        var button = $(event.target);
-        var chosenFullName = button.text();
+Template.pictureChoice.events({
+    "click .picture": function (event) {
+        var picture = $(event.target);
         var personToFind = Session.get("personToFind");
-        var fullNameToFind = personToFind.firstName + " " + personToFind.lastName;
 
-        button.addClass("answer");
-        if(chosenFullName === fullNameToFind) {
-            button.addClass("btn-success");
+        picture.addClass("answer");
+        if (picture.data('picture-id') === personToFind.pictureId) {
+            picture.addClass("btn-success");
             var myScore = Session.get("myScore") || 0;
             Session.set("myScore", myScore + 1);
         } else {
-            button.addClass("btn-danger");
+            picture.addClass("btn-danger");
         }
 
         Session.set("answered", true);
-        $(".name-button").not(".answer").attr("disabled", true);
+        $(".picture").not(".answer").addClass('disabled-picture').removeClass('picture');
         event.preventDefault();
-    },
+    }
+});
+
+Template.faceReminder.events({
     "click .next": function() {
         var chosenButton = $(".answer");
         chosenButton.removeClass("answer");
         chosenButton.removeClass("btn-success");
         chosenButton.removeClass("btn-danger");
-        $(".name-button").attr("disabled", false);
+        $("#face-reminder img").addClass("picture").removeClass("disabled-picture");
         Session.set("answered", null);
         Session.set("reload", true);
     }

@@ -1,0 +1,23 @@
+<template name="faceReminder">
+    <div id="face-reminder">
+        <div class="row text-center">
+            <h1>{{person.firstName}} {{person.lastName}} looks like...</h1>
+        </div>
+        <div class="row">
+            {{#each pictures}}
+                {{>pictureChoice}}
+            {{/each}}
+        </div>
+        {{#if answered}}
+            <p>
+                <i class="fa fa-arrow-circle-right next"></i>
+            </p>
+        {{/if}}
+    </div>
+</template>
+
+<template name="pictureChoice">
+    <div class="col-md-3">
+        <img src="{{url}}" data-picture-id="{{_id}}" class="img-rounded img-thumbnail pull-right picture"/>
+    </div>
+</template>
