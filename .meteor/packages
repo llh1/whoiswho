@@ -14,4 +14,6 @@ iron:router
 aldeed:autoform
 aldeed:collection2
 cfs:autoform
+mdg:camera
+mrt:flash-messages
 

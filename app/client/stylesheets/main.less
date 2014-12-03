@@ -76,6 +76,35 @@ body {
 #addProfileContainer {
   margin: 0 auto;
   width: 40%;
+
+  .picture-input {
+    height: 200px;
+    width: 100%;
+    color: #999;
+  }
+
+  #delete-photograph {
+    float: right;
+    margin-right: 5px;
+  }
+
+  #picture-preview {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.camera-popup {
+  width: auto;
+}
+
+.photo-preview {
+  margin-bottom: 10px;
 }
 
 .personBox {
@@ -128,6 +157,7 @@ body {
   img {
     min-width: 230px;
     min-height: 230px;
+    overflow: hidden;
     border: 2px solid #000;
   }
 

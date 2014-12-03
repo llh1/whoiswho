@@ -19,7 +19,7 @@ Template.person.helpers({
     return Session.get("updatePerson" + this._id);
   },
   displayPicture: function() {
-    return Pictures.find({_id: this.pictureId}).fetch()[0];
+    return Pictures.find({$or: [{_id: this.pictureId}, {_id: this.photographId}]}).fetch()[0];
   },
   profileInfo: function() {
     var id = this._id;
@@ -46,6 +46,8 @@ Template.person.events({
   },
   "click .delete-person-button": function() {
     Persons.remove(this._id);
+    Pictures.remove(this.pictureId);
+    Pictures.remove(this.photographId);
   },
   "click .cancel-update-person-button": function(event) {
     Session.set("updatePerson" + this._id, false);

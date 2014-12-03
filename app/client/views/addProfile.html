@@ -1,5 +1,6 @@
 <template name="addProfile">
     <div id="addProfileContainer">
+        {{> flashMessages}}
         <h2>Add a new profile</h2>
         {{#autoForm collection="Persons" id="addProfileForm" type="insert"}}
             <fieldset>
@@ -7,9 +8,28 @@
                 {{> afQuickField name='lastName'}}
                 {{> afQuickField name='company'}}
                 {{> afQuickField name='role'}}
-                {{> afQuickField name="pictureId" type="cfs-file" collection="pictures"}}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{> afQuickField name="pictureId" class="picture-input" type="cfs-file" collection="pictures"}}
+                    </div>
+                    <div class="col-md-6">
+                        {{#if newProfilePicture}}
+                        <i class="fa fa-trash" id="delete-photograph"></i>
+                        {{/if}}
+                        <label class="control-label" id="take-picture">...or Take a Picture!</label>
+                        {{#if newProfilePicture}}
+                        <div id="picture-preview">
+                            <img src="{{newProfilePicture}}" class="take-new-picture-button img-rounded" />
+                        </div>
+                        {{else}}
+                        <button type="button" class="take-new-picture-button picture-input btn btn-default" id="take-picture">
+                            Click here to take a picture
+                        </button>
+                        {{/if}}
+                    </div>
+                </div>
             </fieldset>
-            <button type="submit" class="btn btn-primary">Insert</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Insert</button>
         {{/autoForm}}
     </div>
 </template>

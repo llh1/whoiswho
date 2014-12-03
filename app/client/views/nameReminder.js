@@ -12,7 +12,7 @@ Template.nameReminder.helpers({
     picture: function() {
         var personToFind = Session.get("personToFind");
         if(personToFind) {
-            return Pictures.find({_id: personToFind.pictureId}).fetch()[0];
+            return Pictures.find({_id: personToFind.pictureId || personToFind.photographId}).fetch()[0];
         }
     },
     answered: function() {

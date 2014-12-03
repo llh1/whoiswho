@@ -8,7 +8,10 @@ Template.faceReminder.helpers({
         }));
         Session.set("personToFind", shuffledPersons[0]);
 
-        var pictureIds = _.pluck(shuffledPersons, "pictureId");
+        var pictureIds = _.map(shuffledPersons, function(person) {
+            if(person.pictureId) return person.pictureId;
+            if(person.photographId) return person.photographId;
+        });
         return Pictures.find({_id: {$in: pictureIds}});
     },
     person: function() {
@@ -25,7 +28,8 @@ Template.pictureChoice.events({
         var personToFind = Session.get("personToFind");
 
         picture.addClass("answer");
-        if (picture.data('picture-id') === personToFind.pictureId) {
+        if (picture.data('picture-id') === personToFind.pictureId ||
+            picture.data('picture-id') === personToFind.photographId) {
             picture.addClass("btn-success");
             var myScore = Session.get("myScore") || 0;
             Session.set("myScore", myScore + 1);

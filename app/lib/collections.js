@@ -22,8 +22,14 @@ Persons.attachSchema(new SimpleSchema({
         optional: true,
         max: 100
     },
+    photographId: {
+        type: String,
+        optional: true
+    },
     pictureId: {
-        type: String
+        label: "Upload...",
+        type: String,
+        optional: true
     },
     random: {
         type: [Number, Number],
@@ -32,5 +38,12 @@ Persons.attachSchema(new SimpleSchema({
 }));
 
 Pictures = new FS.Collection("pictures", {
-    stores: [new FS.Store.FileSystem("pictures", {path: "~/Development/meteor/who-is-who/uploads"})]
+    stores: [new FS.Store.FileSystem("pictures", {
+        path: "~/Development/meteor/who-is-who/uploads",
+        beforeWrite: function(file) {
+            return {
+                name: "photograph.jpg"
+            }
+        }
+    })]
 });

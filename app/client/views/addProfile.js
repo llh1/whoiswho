@@ -1,29 +1,41 @@
-//Template.addProfile.events({
-//    "click #add-person-button": function() {
-//        var formValues = {createdAt: new Date()};
-//        var inputs = $("#add-person-form").serializeArray();
-//
-//        _.each(inputs, function (input) {
-//            formValues[input.name] = input.value;
-//        });
-//
-//        var picture = $("#picture")[0].files[0];
-//        if (picture != undefined) {
-//            Pictures.insert(picture, function (err, file) {
-//                formValues["pictureId"] = file._id;
-//            });
-//        }
-//        formValues["random"] = Math.random();
-//        Persons.insert(formValues);
-//        return false;
-//    }
-//});
+Template.addProfile.helpers({
+    newProfilePicture: function() {
+        return Session.get(NEW_PHOTOGRAPH);
+    }
+});
+
+Template.addProfile.events({
+    "click .take-new-picture-button": function(event) {
+        MeteorCamera.getPicture({width: 300, height: 300, quality: 80}, function(error, data) {
+            Session.set(NEW_PHOTOGRAPH, data);
+        });
+        event.preventDefault();
+    },
+    "click #delete-photograph": function(event) {
+        Session.set(NEW_PHOTOGRAPH, null);
+        event.preventDefault();
+    }
+});
 
 AutoForm.hooks({
     addProfileForm: {
         formToDoc: function(doc) {
             doc.random = [Math.random(), 0];
             return doc;
+        },
+        before: {
+            insert: function(doc, template) {
+                var pictureFromCamera = Session.get(NEW_PHOTOGRAPH);
+                if(pictureFromCamera) {
+                    var file = Pictures.insert(pictureFromCamera);
+                    doc.photographId = file._id;
+                }
+                return doc;
+            }
+        },
+        onSuccess: function(operation, result, template) {
+            Session.set(NEW_PHOTOGRAPH, null);
+            FlashMessages.sendSuccess("New profile successfully added!");
         }
     }
 });
