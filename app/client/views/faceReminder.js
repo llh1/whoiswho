@@ -28,11 +28,13 @@ Template.pictureChoice.events({
         var personToFind = Session.get("personToFind");
 
         picture.addClass("answer");
-        if (picture.data('picture-id') === personToFind.pictureId ||
-            picture.data('picture-id') === personToFind.photographId) {
+        if (picture.data('picture-id') === personToFind.pictureId || picture.data('picture-id') === personToFind.photographId) {
             picture.addClass("btn-success");
-            var myScore = Session.get("myScore") || 0;
-            Session.set("myScore", myScore + 1);
+            if(Meteor.userId()) {
+                var myNewScore = Session.get("myScore") + 1;
+                Session.set("myScore", myNewScore);
+                Meteor.call("increaseScore");
+            }
         } else {
             picture.addClass("btn-danger");
         }

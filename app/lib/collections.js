@@ -34,6 +34,9 @@ Persons.attachSchema(new SimpleSchema({
     random: {
         type: [Number, Number],
         decimal: true
+    },
+    createdById: {
+        type: String
     }
 }));
 

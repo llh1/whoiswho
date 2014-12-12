@@ -21,6 +21,7 @@ AutoForm.hooks({
     addProfileForm: {
         formToDoc: function(doc) {
             doc.random = [Math.random(), 0];
+            doc.createdById = Meteor.userId();
             return doc;
         },
         before: {

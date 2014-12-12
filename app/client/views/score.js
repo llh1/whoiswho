@@ -1,5 +1,7 @@
 Template.score.helpers({
    "myScore": function() {
-       return Session.get("myScore") || 0;
+       var myScore = Meteor.user().score;
+       Session.set("myScore", myScore);
+       return Meteor.userId() ? myScore : 0;
    }
 });

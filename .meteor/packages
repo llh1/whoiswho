@@ -4,8 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-insecure
 less
 nemo64:bootstrap
 cfs:standard-packages
@@ -16,4 +14,7 @@ aldeed:collection2
 cfs:autoform
 mdg:camera
 mrt:flash-messages
-
+accounts-ui
+accounts-password
+accounts-github
+accounts-weibo

@@ -11,7 +11,11 @@ Router.route('/list', function() {
 });
 
 Router.route('/add', function() {
-   this.render('AddProfile');
+    if(!Meteor.userId()) {
+        this.render('List');
+    } else {
+        this.render('AddProfile');
+    }
 });
 
 Router.route('/nameReminder', function() {
@@ -20,4 +24,8 @@ Router.route('/nameReminder', function() {
 
 Router.route('/faceReminder', function() {
    this.render('FaceReminder');
+});
+
+Router.route('/top10', function() {
+    this.render('Top10');
 });

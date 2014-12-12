@@ -1,0 +1,33 @@
+<template name="top10">
+    <div id="top10Container">
+        <h1>Top 10</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each personInTop10}}
+                {{> top10row}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<template name="top10row">
+    <tr class="{{this.class}}">
+        <td>
+            {{#if isFirst}}
+                <i class="fa fa-trophy"></i>
+            {{else}}
+                {{this.position}}
+            {{/if}}
+        </td>
+        <td>{{this.username}}</td>
+        <td>{{this.score}}</td>
+    </tr>
+</template>

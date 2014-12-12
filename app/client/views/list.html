@@ -7,8 +7,7 @@
 </template>
 
 <template name="person">
-      <div class="personBox col-lg-3 col-sm-4 col-xs-6">
-          <img src="{{displayPicture.url}}" class="img-responsive"/>
+      <div class="personBox col-lg-3 col-sm-4 col-xs-6" style="background-image:url('{{displayPicture.url}}')">
           {{#if editing}}
               <div class="edit-form">
                   <form role="form" class="form-horizontal">
@@ -43,12 +42,14 @@
                   </form>
               </div>
           {{else}}
-          <span class="identity">{{firstName}} {{lastName}}</span>
-          <div class="edit">
-              <i id="profile-info-{{_id}}" class="fa fa-user show-profile-button" data-toggle="tooltip" data-placement="bottom" title="{{profileInfo}}"></i>
-              <i class="fa fa-pencil-square-o update-person-button"></i>
-              <i class="fa fa-trash delete-person-button"></i>
-          </div>
+              <div class="edit">
+                  <i id="profile-info-{{_id}}" class="fa fa-user show-profile-button" data-toggle="tooltip" data-placement="bottom" title="{{profileInfo}}"></i>
+                  {{#if canEdit}}
+                    <i class="fa fa-pencil-square-o update-person-button"></i>
+                    <i class="fa fa-trash delete-person-button"></i>
+                  {{/if}}
+              </div>
+              <span class="identity">{{fullname}}</span>
           {{/if}}
       </div>
 </template>

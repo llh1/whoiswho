@@ -32,6 +32,7 @@ Template.nameReminder.events({
             button.addClass("btn-success");
             var myScore = Session.get("myScore") || 0;
             Session.set("myScore", myScore + 1);
+            Meteor.call("increaseScore");
         } else {
             button.addClass("btn-danger");
         }

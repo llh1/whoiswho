@@ -15,16 +15,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Who's Who</a>
+                    <a class="navbar-brand" href="/" id="title">Who's Who</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="{{activeIfTemplateIs ''}}"><a href="/"><i class="fa fa-list"></i> List <span class="sr-only">(current)</span></a></li>
+                        {{#if currentUser}}
                         <li class="{{activeIfTemplateIs 'Add'}}"><a href="/add"><i class="fa fa-plus-square"></i> Add a New Profile</a></li>
+                        {{/if}}
                         <li class="{{activeIfTemplateIs 'NameReminder'}}"><a href="/nameReminder"><i class="fa fa-font"></i> The Name Reminder</a></li>
                         <li class="{{activeIfTemplateIs 'FaceReminder'}}"><a href="/faceReminder"><i class="fa fa-picture-o"></i> The Face Reminder</a></li>
+                        <li class="{{activeIfTemplateIs 'Top10'}}"><a href="/top10"><i class="fa fa-gamepad"></i> Top 10</a></li>
+                        {{#if currentUser}}
                         <li><a href="#"><i class="fa fa-rocket"></i> {{> score}}</a></li>
+                        {{/if}}
+                        <li><a><i class="fa fa-user"></i> {{> loginButtons}}</a></li>
                     </ul>
                     <div class="nav navbar-nav navbar-right">
                         {{> searchBox}}
